@@ -1,0 +1,7 @@
+name = "JuliaCon2020Workshops"
+uuid = "525a82da-6cbc-44c3-877b-b9567f3fd09b"
+authors = ["Tamás Cserteg <csertegt@gmail.com> and contributors"]
+version = "0.1.0"
+
+[compat]
+julia = "1.3"
