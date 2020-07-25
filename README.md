@@ -8,8 +8,7 @@ You only need to have julia installed (at least version 1.3), every other depend
 You should install the package with:
 
 ```julia
-using Pkg
-Pkg.develop(url="https://github.com/cserteGT3/JuliaCon2020Workshops.jl")
+] dev https://github.com/cserteGT3/JuliaCon2020Workshops.jl
 ```
 
 ## Usage
@@ -19,6 +18,14 @@ Print the available workshops:
 ```julia
 using JuliaCon2020Workshops
 showworkshops()
+
+The following workshops can be downloaded (by their shortname):
+shortname: Workshop name
+MLJ: MLJ: A Machine Learning Toolbox for Julia
+LightGraphs: Building and analyzing Graphs at scale with Light Graphs
+DataFrames: A Deep Dive into DataFrames.jl Indexing
+LearnJulia: Learn Julia via Epidemic Modeling
+CxxWrap: Wrapping a C++ Library with CxxWrap.jl
 ```
 
 Then download the selected, with its shortened name:

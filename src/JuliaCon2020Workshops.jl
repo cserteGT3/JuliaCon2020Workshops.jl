@@ -25,7 +25,7 @@ WORKSHOPS = Dict("LearnJulia"=>Workshop("https://github.com/dpsanders/LearnJulia
             "MLJ"=>Workshop("https://github.com/ablaom/MachineLearningInJulia2020", "MachineLearningInJulia2020", "MLJ: A Machine Learning Toolbox for Julia"))
 
 function showworkshops()
-    println("The following workshops can be downloaded:")
+    println("The following workshops can be downloaded (by their shortname):")
     println("shortname: Workshop name")
     for (k,v) in pairs(WORKSHOPS)
         println("$k: $(v.name)")
