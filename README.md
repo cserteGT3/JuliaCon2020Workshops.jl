@@ -9,7 +9,10 @@ You should install the package with:
 
 ```julia
 ] dev https://github.com/cserteGT3/JuliaCon2020Workshops.jl
+  add GitCommand#master
 ```
+
+You need to add the `GitCommand#master` package in order to get tha package working. (You can just paste the above commands to the Julia REPL.)
 
 ## Usage
 
