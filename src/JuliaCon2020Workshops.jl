@@ -4,28 +4,34 @@ using GitCommand
 using IJulia
 
 export  getworkshop,
-        getworkhops,
         updateworkshop,
-        updateworkshops,
-        initworkshop
+        initworkshop,
+        showworkshops
 
 WORKSHOP_DIR = joinpath(dirname(@__DIR__), "workshops")
 
 struct Workshop
     repo::String
     projectname::String
+    name::String
 end
 
 workshopdir(ws::Workshop) = joinpath(WORKSHOP_DIR, ws.projectname)
 
-export WORKSHOPS
+WORKSHOPS = Dict("LearnJulia"=>Workshop("https://github.com/dpsanders/LearnJulia2020.git", "LearnJulia2020", "Learn Julia via Epidemic Modeling"),
+            "LightGraphs"=>Workshop("https://github.com/matbesancon/lightgraphs_workshop.git", "lightgraphs_workshop", "Building and analyzing Graphs at scale with Light Graphs"),
+            "CxxWrap"=>Workshop("https://github.com/barche/cxxwrap-juliacon2020", "cxxwrap-juliacon2020", "Wrapping a C++ Library with CxxWrap.jl"),
+            "DataFrames"=>Workshop("https://github.com/bkamins/JuliaCon2020-DataFrames-Tutorial", "JuliaCon2020-DataFrames-Tutorial", "A Deep Dive into DataFrames.jl Indexing"),
+            "MLJ"=>Workshop("https://github.com/ablaom/MachineLearningInJulia2020", "MachineLearningInJulia2020", "MLJ: A Machine Learning Toolbox for Julia"))
 
-WORKSHOPS = Dict("LearnJulia"=>Workshop("https://github.com/dpsanders/LearnJulia2020.git", "LearnJulia2020"),
-            "LightGraphs"=>Workshop("https://github.com/matbesancon/lightgraphs_workshop.git", "lightgraphs_workshop"),
-            "CxxWrap"=>Workshop("https://github.com/barche/cxxwrap-juliacon2020", "cxxwrap-juliacon2020"),
-            "DataFrames"=>Workshop("https://github.com/bkamins/JuliaCon2020-DataFrames-Tutorial", "JuliaCon2020-DataFrames-Tutorial"),
-            "MLJ"=>Workshop("https://github.com/ablaom/MachineLearningInJulia2020", "MachineLearningInJulia2020"))
-
+function showworkshops()
+    println("The following workshops can be downloaded:")
+    println("shortname: Workshop name")
+    for (k,v) in pairs(WORKSHOPS)
+        println("$k: $(v.name)")
+    end
+    return nothing
+end
 
 function getworkshop(name)
     ws = WORKSHOPS[name]
