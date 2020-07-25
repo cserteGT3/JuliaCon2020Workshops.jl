@@ -1,6 +1,6 @@
 # JuliaCon2020Workshops
 
-With this package, you can download all the available workshop materials for [JuliaCon2020](https://juliacon.org/2020/).
+With this package, you can download all available workshop materials for [JuliaCon2020](https://juliacon.org/2020/).
 You only need to have julia installed (at least version 1.3), every other dependency is included in the package.
 
 ## Install
