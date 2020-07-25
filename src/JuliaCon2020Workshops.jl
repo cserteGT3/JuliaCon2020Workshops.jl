@@ -21,7 +21,10 @@ workshopdir(ws::Workshop) = joinpath(WORKSHOP_DIR, ws.projectname)
 export WORKSHOPS
 
 WORKSHOPS = Dict("LearnJulia"=>Workshop("https://github.com/dpsanders/LearnJulia2020.git", "LearnJulia2020"),
-            "LightGraphs"=>Workshop("https://github.com/matbesancon/lightgraphs_workshop.git", "lightgraphs_workshop"))
+            "LightGraphs"=>Workshop("https://github.com/matbesancon/lightgraphs_workshop.git", "lightgraphs_workshop"),
+            "CxxWrap"=>Workshop("https://github.com/barche/cxxwrap-juliacon2020", "cxxwrap-juliacon2020"),
+            "DataFrames"=>Workshop("https://github.com/bkamins/JuliaCon2020-DataFrames-Tutorial", "JuliaCon2020-DataFrames-Tutorial"),
+            "MLJ"=>Workshop("https://github.com/ablaom/MachineLearningInJulia2020", "MachineLearningInJulia2020"))
 
 
 function getworkshop(name)
