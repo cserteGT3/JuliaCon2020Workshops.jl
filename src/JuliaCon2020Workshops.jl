@@ -12,26 +12,22 @@ export  getworkshop,
 WORKSHOP_DIR = joinpath(dirname(@__DIR__), "workshops")
 
 struct Workshop
-    name::String
     repo::String
     projectname::String
 end
 
+workshopdir(ws::Workshop) = joinpath(WORKSHOP_DIR, ws.projectname)
+
 export WORKSHOPS
 
-WORKSHOPS = Dict("LearnJulia"=>Workshop("LearnJulia", "https://github.com/dpsanders/LearnJulia2020.git", "LearnJulia2020"),
-            "LightGraphs"=>Workshop("LightGraphs", "https://github.com/matbesancon/lightgraphs_workshop.git", "lightgraphs_workshop"))
+WORKSHOPS = Dict("LearnJulia"=>Workshop("https://github.com/dpsanders/LearnJulia2020.git", "LearnJulia2020"),
+            "LightGraphs"=>Workshop("https://github.com/matbesancon/lightgraphs_workshop.git", "lightgraphs_workshop"))
 
-function checkworkshopdir(name)
-    wspath = joinpath(WORKSHOP_DIR, name)
-    isdir(wspath) || mkpath(wspath)
-    return nothing
-end
 
 function getworkshop(name)
     ws = WORKSHOPS[name]
-    checkworkshopdir(ws.projectname)
-    repodir = joinpath(WORKSHOP_DIR, ws.projectname)
+    repodir = workshopdir(ws)
+    isdir(repodir) || mkpath(repodir)
     git() do git
         run(`$git clone $(ws.repo) $repodir`)
     end
@@ -40,14 +36,15 @@ end
 function updateworkshop(name; force = false)
     currdir = pwd()
     ws = WORKSHOPS[name]
-    repodir = joinpath(WORKSHOP_DIR, ws.projectname)
+    repodir = workshopdir(ws)
     isdir(repodir) || error("""Workshop: $name is not cloned! Run getworkshop("$name") first""")
     cd(repodir)
     git() do git
         if force
-            run(`$git stash -qu`)
+            run(`$git stash -u`)
         end
-        run(`$git pull -q`)
+        println("Note: Please discard the messages below!")
+        run(`$git pull`)
     end
     cd(currdir)
     return nothing
@@ -55,11 +52,10 @@ end
 
 function initworkshop(name)
     ws = WORKSHOPS[name]
-    repodir = joinpath(WORKSHOP_DIR, ws.projectname)
+    repodir = workshopdir(ws)
     isdir(repodir) || error("""Workshop: $name is not cloned! Run getworkshop("$name") first""")
     notebook(detached=true, dir=repodir)
     return nothing
 end
-
 
 end
